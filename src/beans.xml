@@ -1,0 +1,91 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:p="http://www.springframework.org/schema/p"
+ xmlns:tx="http://www.springframework.org/schema/tx"
+ xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/aop 
+  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+  http://www.springframework.org/schema/context 
+  http://www.springframework.org/schema/context/spring-context-3.0.xsd
+  http://www.springframework.org/schema/tx 
+  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+  http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring   
+  http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
+
+    <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver">
+		</property>
+		<property name="url"
+			value="jdbc:oracle:thin:@127.0.0.1:1521:orcl">
+		</property>
+		<property name="username" value="scott"></property>
+		<property name="password" value="root"></property>
+	</bean>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+	    <property name="hibernateProperties">
+	      	<props>
+		        <prop key="show_sql">true</prop>
+		        <prop key="format_sql">true</prop>
+		        <prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+                <prop key="hbm2ddl.auto">create</prop>
+                <prop key="hibernate.transaction.factory_class">
+                    org.hibernate.transaction.JDBCTransactionFactory</prop>
+   			</props>
+	    </property>
+	     <property name="annotatedClasses">
+			<list>
+				<value>com.java1234.model.Affiche</value>
+				<value>com.java1234.model.BigType</value>
+				<value>com.java1234.model.Cart</value>
+				<value>com.java1234.model.Goods</value>
+				<value>com.java1234.model.Link</value>
+				<value>com.java1234.model.Manager</value>
+				<value>com.java1234.model.Member</value>
+				<value>com.java1234.model.Order</value>
+				<value>com.java1234.model.OrderDetail</value>
+				<value>com.java1234.model.SmallType</value>
+			</list>
+		</property>
+  	</bean>
+  	
+  	<context:annotation-config/>
+  	<context:component-scan base-package="com.java1234" />
+  	
+	<!-- 设置XML的事物管理 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+  		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 配置事务传播特性 -->
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*Register" propagation="REQUIRED" />
+			<tx:method name="change*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="load*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 配置哪些类的哪些方法参与事务 -->
+	<aop:config>
+		<aop:advisor pointcut="execution(public * com.java1234.service.*.*(..))" advice-ref="transactionAdvice" />
+	</aop:config>
+	
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+</beans>

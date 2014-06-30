@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="mall" namespace="/" extends="struts-default">
+		<action name="goindex" class="com.java1234.action.IndexAction">
+			<result name="index">/index.jsp</result>
+		</action>
+		
+		<action name="affiche" class="com.java1234.action.AfficheAction">
+			<result name="oneAffiche">/fg-afficheSelect.jsp</result>
+			<result name="bg-afficheSelect">/bg-afficheSelect.jsp</result>
+			<result name="bg-afficheResult">/bg-afficheResult.jsp</result>
+			<result name="bg-afficheContent">/bg-afficheContent.jsp</result>
+			<result name="bg-afficheUpdate">/bg-afficheUpdate.jsp</result>
+		</action>
+		
+		<action name="goods" class="com.java1234.action.GoodsAction">
+			<result name="goodsDetail">/bg-sellResult.jsp</result>
+			<result name="selectBigType">/fg-selectBigGoods.jsp</result>
+			<result name="newGoods">/bg-newGoods.jsp</result>
+			<result name="freeGoods">/fg-selectFreeGoods.jsp</result>
+			<result name="fg-goodSelectOne">/fg-goodSelectOne.jsp</result>
+			<result name="cartAdd">/cart_add.jsp</result>
+			<result name="input">/cart_add.jsp</result>
+			<result name="bg-goodsFreePirce">/bg-goodsFreePirce.jsp</result>
+			<result name="bg-goodsResult">/bg-goodsResult.jsp</result>
+			<result name="bg-goodInsert">/bg-goodInsert.jsp</result>
+			<result name="bg-goodSelectBig">/bg-goodSelectBig.jsp</result>
+			<result name="bg-goodSelectSmall">/bg-goodSelectSmall.jsp</result>
+		</action>
+		
+	
+		<action name="member" class="com.java1234.action.MemberAction">
+			<result name="register">/bg-memberRegister.jsp</result>
+			<result name="login">/bg-memberRegister.jsp</result>
+			<result name="logOut">/bg-memberRegister.jsp</result>
+			<result name="fg-Two">/fg-Two.jsp</result>
+			<result name="fg-three">/fg-three.jsp</result>
+			<result name="fg-four">/fg-four.jsp</result>
+			<result name="fg-updateMember">/fg-updateMember.jsp</result>
+			<result name="updateMember">/bg-memberRegister.jsp</result>
+			<result name="index">/index.jsp</result>
+			<result name="bg-selectMember">/bg-selectMember.jsp</result>
+			<result name="bg-selectContent">/bg-selectContent.jsp</result>
+		</action>
+		
+		<action name="order" class="com.java1234.action.OrderAction">
+			<result name="orderDetail">/cart_detail.jsp</result>
+			<result name="orderDetail2">/cart_detail2.jsp</result>
+			<result name="index">/index.jsp</result>
+			<result name="checkOutOrder">/cart_checkOutOrder.jsp</result>
+			<result name="bg-orderSelect">/bg-orderSelect.jsp</result>
+			<result name="bg-orderContent">/bg-orderContent.jsp</result>
+			<result name="cart_see">/cart_see.jsp</result>
+		</action>
+		
+		<action name="manager" class="com.java1234.action.ManagerAction">
+			<result name="bg-orderSelect">/bg-orderSelect.jsp</result>
+			<result name="bg-land">/bg-memberRegister.jsp</result>
+			<result name="bg-goodSelect">/bg-goodSelect.jsp</result>
+			<result name="bg-goodSelectContent">/bg-goodSelectContent.jsp</result>
+			<result name="bg-goodsResult">/bg-goodsResult.jsp</result>
+			<result name="bg-linkSelect">/bg-linkSelect.jsp</result>
+			<result name="index">/index0.jsp</result>
+		</action>
+		
+		<action name="link" class="com.java1234.action.LinkAction">
+			<result name="bg-linkSelect">/bg-linkSelect.jsp</result>
+		</action>
+		
+		<action name="bigType" class="com.java1234.action.BigTypeAction">
+			<result name="bg-bigTypeSelect">/bg-bigTypeSelect.jsp</result>
+			<result name="bg-bigTypeResult">/bg-bigTypeResult.jsp</result>
+		</action>
+		
+		<action name="smallType" class="com.java1234.action.SmallTypeAction">
+			<result name="bg-smallTypeSelect">/bg-smallTypeSelect.jsp</result>
+			<result name="bg-smallTypeInsert">/bg-smallTypeInsert.jsp</result>
+			<result name="bg-smallTypeResult">/bg-smallTypeResult.jsp</result>
+		</action>
+		
+	</package>
+</struts>
+	
